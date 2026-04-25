@@ -48,6 +48,7 @@
         color: #cbd5e1;
       }
       .btn-primary {
+        display: inline-block; /*clave para que respete los márgenes*/
         background-color: #25d366; /* Verde WhatsApp */
         color: #fff;
         padding: 15px 30px;
@@ -55,6 +56,10 @@
         font-weight: bold;
         font-size: 1.1em;
         transition: 0.3s;
+        box-sizing: border-box;
+        width: 100%; /* en celular ocupara el ancho seguro*/
+        max-width: 300px; /*en pc no se hara gigante*/
+        white-space: normal; /* permite que el texto baje de linea ordenado*/
       }
       .btn-primary:hover {
         background-color: #1ebd5c;
