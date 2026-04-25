@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web y Soluciones Tecnológicas</title>
+    <style>
+        /* Estilos Base */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: #1a1a1a; }
+        a { text-decoration: none; }
+        
+        /* Contenedores */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #0f172a;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            color: #fff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #cbd5e1;
+        }
+        .btn-primary {
+            background-color: #25d366; /* Verde WhatsApp */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #1ebd5c;
+        }
+
+        /* Sección Servicios */
+        .servicios {
+            background-color: #f8fafc;
+            text-align: center;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .card h3 { color: #2563eb; }
+
+        /* Sección Portafolio */
+        .portafolio {
+            text-align: center;
+        }
+        .proyecto {
+            background: #e2e8f0;
+            height: 200px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        /* Sobre Mí & Contacto */
+        .sobre-mi, .contacto {
+            text-align: center;
+        }
+        .contacto {
+            background-color: #0f172a;
+            color: #fff;
+        }
+        .contacto h2 { color: #fff; }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Transformo tu negocio en una máquina de ventas digital</h1>
+            <p>Sistemas web a medida, rápidos y seguros para que gestiones tu empresa sin estrés.</p>
+            <a href="https://wa.me/593985560412?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto" class="btn-primary" target="_blank">Cotizar mi proyecto por WhatsApp</a>
+        </div>
+    </header>
+
+    <section class="servicios container">
+        <h2>Soluciones diseñadas para tu rentabilidad</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Diseño Web Rápido</h3>
+                <p>Páginas de aterrizaje (Landing Pages) modernas con HTML y JavaScript, diseñadas para captar clientes desde el primer segundo.</p>
+            </div>
+            <div class="card">
+                <h3>Sistemas de Gestión</h3>
+                <p>Aplicaciones internas con un backend sólido en Python para automatizar procesos, controlar inventarios y gestionar empleados.</p>
+            </div>
+            <div class="card">
+                <h3>Bases de Datos Seguras</h3>
+                <p>Estructuración y protección de la información de tus clientes utilizando bases de datos relacionales robustas como PostgreSQL.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portafolio container">
+        <h2>Proyectos Destacados</h2>
+        <p>Soluciones reales aplicadas a negocios.</p>
+        <div class="grid-3">
+            <div class="card">
+                <div class="proyecto">[Imagen del Proyecto 1]</div>
+                <h3>Landing Page para Restaurante</h3>
+                <p><strong>Problema:</strong> Pérdida de reservas por lentitud.<br><strong>Solución:</strong> Interfaz ligera orientada a conversión directa móvil.</p>
+            </div>
+            <div class="card">
+                <div class="proyecto">[Imagen del Proyecto 2]</div>
+                <h3>Panel de Control de Inventario</h3>
+                <p><strong>Problema:</strong> Descontrol de stock en tienda física.<br><strong>Solución:</strong> Sistema seguro para registro en tiempo real.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sobre-mi container">
+        <h2>Sobre el Desarrollador</h2>
+        <p>Soy un desarrollador tecnológico enfocado en crear herramientas que hagan ganar tiempo y dinero a emprendedores y empresas. Desde Babahoyo, ofrezco soluciones integrales para negocios en Los Ríos y en el mercado internacional remoto. Mi objetivo es que la tecnología trabaje a tu favor, construyendo plataformas estables y de alto rendimiento.</p>
+    </section>
+
+    <footer class="contacto">
+        <div class="container">
+            <h2>¿Listo para digitalizar tu negocio?</h2>
+            <p>Hablemos sobre tu idea. Escríbeme directamente y empecemos a trabajar.</p>
+            <br>
+            <a href="https://wa.me/593985560412" class="btn-primary" target="_blank">Escribir al WhatsApp</a>
+            <p style="margin-top: 30px; color: #94a3b8;">
+                También puedes revisar mi código fuente en <a href="TU_ENLACE_A_GITHUB" target="_blank" style="color: #38bdf8;">GitHub</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
