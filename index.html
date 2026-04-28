@@ -1,234 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Desarrollo Web y Soluciones Tecnológicas</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollo Web Avanzado | Soluciones Tecnológicas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <style>
-      /* Estilos Base */
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #333;
-        line-height: 1.6;
-      }
-      h1,
-      h2,
-      h3 {
-        color: #1a1a1a;
-      }
-      a {
-        text-decoration: none;
-      }
+        :root {
+            --bg-color: #030712;
+            --neon-accent: #00ffcc;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --panel-bg: rgba(15, 23, 42, 0.6);
+        }
 
-      /* Contenedores */
-      .container {
-        width: 90%;
-        max-width: 1200px;
-        margin: auto;
-        padding: 40px 0;
-      }
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-      /* Hero Section */
-      .hero {
-        background-color: #0f172a;
-        color: #fff;
-        text-align: center;
-        padding: 100px 20px;
-      }
-      .hero h1 {
-        color: #fff;
-        font-size: 2.5em;
-        margin-bottom: 10px;
-      }
-      .hero p {
-        font-size: 1.2em;
-        margin-bottom: 30px;
-        color: #cbd5e1;
-      }
-      .btn-primary {
-        display: inline-block; /*clave para que respete los márgenes*/
-        background-color: #25d366; /* Verde WhatsApp */
-        color: #fff;
-        padding: 15px 30px;
-        border-radius: 5px;
-        font-weight: bold;
-        font-size: 1.1em;
-        transition: 0.3s;
-        box-sizing: border-box;
-        width: 100%; /* en celular ocupara el ancho seguro*/
-        max-width: 300px; /*en pc no se hara gigante*/
-        white-space: normal; /* permite que el texto baje de linea ordenado*/
-      }
-      .btn-primary:hover {
-        background-color: #1ebd5c;
-      }
+        /* Tipografía Tech para títulos y acentos */
+        .tech-text { font-family: 'Share Tech Mono', monospace; color: var(--neon-accent); }
 
-      /* Sección Servicios */
-      .servicios {
-        background-color: #f8fafc;
-        text-align: center;
-      }
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-top: 30px;
-      }
-      .card {
-        background: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      }
-      .card h3 {
-        color: #2563eb;
-      }
+        /* Fondo Animado y Marca de Agua */
+        #canvas-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; }
+        
+        .watermark {
+            position: fixed; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            width: 50vw; /* Tamaño del logo (ocupa el 50% del ancho de la pantalla) */
+            height: 50vh; 
+            /* Reemplaza la URL de abajo por el enlace real de tu logo */
+            background-image: url('img/logotipos-3.png'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain; /* Evita que el logo se deforme */
+            opacity: 0.08; /* Nivel de transparencia (0.03 es ideal para fondos oscuros) */
+            pointer-events: none; /* Evita que el logo bloquee los clics en la página */
+            z-index: -1; 
+            user-select: none;
+        }
 
-      /* Sección Portafolio */
-      .portafolio {
-        text-align: center;
-      }
-      img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px; /* Opcional: le da esquinas redondeadas elegantes */
-      }
-      .proyecto {
-        background: #e2e8f0;
-        height: 200px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64748b;
-        margin-bottom: 15px;
-      }
+        /* Contenedores y Paneles Glassmorphism */
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 60px 0; position: relative; z-index: 1; }
+        
+        .glass-panel {
+            background: var(--panel-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 255, 204, 0.15); border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); padding: 40px; margin-bottom: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-panel:hover { box-shadow: 0 8px 32px rgba(0, 255, 204, 0.1); border-color: rgba(0, 255, 204, 0.4); }
 
-      /* Sobre Mí & Contacto */
-      .sobre-mi,
-      .contacto {
-        text-align: center;
-      }
-      .contacto {
-        background-color: #0f172a;
-        color: #fff;
-      }
-      .contacto h2 {
-        color: #fff;
-      }
+        /* Botones Neón */
+        .btn-neon {
+            display: inline-block; width: 100%; max-width: 300px; text-align: center;
+            background: transparent; color: var(--neon-accent);
+            border: 1px solid var(--neon-accent); border-radius: 6px;
+            padding: 15px 20px; font-size: 1rem; font-weight: bold; text-decoration: none;
+            text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 204, 0.1); cursor: pointer; box-sizing: border-box;
+        }
+        .btn-neon:hover {
+            background: var(--neon-accent); color: var(--bg-color);
+            box-shadow: 0 0 20px var(--neon-accent), 0 0 40px var(--neon-accent);
+        }
+
+        /* Estructura Grid */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        h1 { font-size: 3rem; margin-bottom: 10px; line-height: 1.2; }
+        h2 { font-size: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 30px;}
+        p { color: var(--text-muted); }
+
+        /* Elementos del Formulario (Cotizador) */
+        select, input[type="checkbox"] {
+            background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+            padding: 10px; border-radius: 4px; font-family: 'Inter', sans-serif;
+        }
+        select option { background: var(--bg-color); }
+        .precio-display { font-size: 2.5rem; color: var(--neon-accent); font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 10px rgba(0, 255, 204, 0.3); }
+
+        /* Imágenes de Portafolio */
+        .portafolio-img { width: 100%; height: 200px; background: #1e293b; border-radius: 8px; margin-bottom: 15px; object-fit: cover; border: 1px solid rgba(255,255,255,0.05); }
+
+        /* --- Estilos para el Visualizador de Imágenes (Modal) --- */
+        .modal-futurista {
+            display: none; /* Oculto por defecto */
+            position: fixed; 
+            z-index: 9999; /* Para que quede por encima de TODO */
+            left: 0; top: 0; width: 100vw; height: 100vh;
+            background-color: rgba(3, 7, 18, 0.85); /* Fondo oscuro transparente */
+            backdrop-filter: blur(10px); /* Efecto cristalino / difuminado */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .modal-contenido {
+            max-width: 90%; 
+            max-height: 85vh;
+            border-radius: 8px;
+            border: 1px solid var(--neon-accent);
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.3); /* Resplandor neón */
+            animation: zoomIn 0.3s ease; /* Pequeña animación al abrir */
+        }
+
+        .cerrar-modal {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--neon-accent);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cerrar-modal:hover { color: #fff; text-shadow: 0 0 10px var(--neon-accent); }
+
+        /* Efecto para que el cursor muestre que la imagen original se puede clickear */
+        .portafolio-img {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portafolio-img:hover {
+            transform: scale(1.03); /* Se hace un 3% más grande al pasar el mouse */
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
     </style>
-  </head>
-  <body>
-    <header class="hero">
-      <div class="container">
-        <h1>Transformo tu negocio en una máquina de ventas digital</h1>
-        <p>
-          Sistemas web a medida, rápidos y seguros para que gestiones tu empresa
-          sin estrés.
-        </p>
-        <a
-          href="https://wa.me/593985560412?text=Hola,%20me%20gustaría%20cotizar%20un%20proyecto"
-          class="btn-primary"
-          target="_blank"
-          >Cotizar mi proyecto en WhatsApp</a
-        >
-      </div>
-    </header>
+</head>
+<body>
 
-    <section class="servicios container">
-      <h2>Soluciones diseñadas para tu rentabilidad</h2>
-      <div class="grid-3">
-        <div class="card">
-          <h3>Diseño Web Rápido</h3>
-          <p>
-            Páginas de aterrizaje (Landing Pages) modernas con HTML y
-            JavaScript, diseñadas para captar clientes desde el primer segundo.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Sistemas de Gestión</h3>
-          <p>
-            Aplicaciones internas con un backend sólido en Python para
-            automatizar procesos, controlar inventarios y gestionar empleados.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Bases de Datos Seguras</h3>
-          <p>
-            Estructuración y protección de la información de tus clientes
-            utilizando bases de datos relacionales robustas como PostgreSQL.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="portafolio container">
-      <h2>Proyectos Destacados</h2>
-      <p>Soluciones reales aplicadas a negocios.</p>
-      <div class="grid-3">
-        <div class="card">
-          <div class="proyecto">
-            <img src="img/barber.png" alt="Vista previa de la landing page" />
-          </div>
-          <h3>Diseño Orientado a Conversión (Barbería)</h3>
-          <p>
-            <strong>Problema:</strong> El negocio perdía clientes porque solo usaban redes sociales y los mensajes se perdían.<br /><strong
-              >Solución:</strong> Desarrollo de una Landing Page de carga ultra rápida (menos de 2 segundos) con diseño atractivo y un llamado a la acción directo a WhatsApp, aumentando las reservas inmediatas.
-          </p>
-        </div>
-        <div class="card">
-          <div class="proyecto">
-            <img
-              src="img/dashboard.png"  alt="Interfaz del panel de control de inventario y ventas"
-            />
-          </div>
-          <h3>Sistema de Gestión y Base de Datos</h3>
-          <p>
-            <strong>Problema:</strong> Descontrol en el inventario y pérdida de datos de clientes por usar hojas de cálculo lentas.<br /><strong
-              >Solución:</strong>Programación de un panel administrativo privado (Dashboard). Utilizo arquitectura backend con Python y almacenamiento estructurado en bases de datos relacionales para garantizar integridad, seguridad y velocidad.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="sobre-mi container">
-      <h2>Sobre el Desarrollador</h2>
-      <p>
-        Soy un desarrollador tecnológico enfocado en crear herramientas que
-        hagan ganar tiempo y dinero a emprendedores y empresas. Desde Babahoyo,
-        ofrezco soluciones integrales para negocios en Los Ríos y en el mercado
-        internacional remoto. Mi objetivo es que la tecnología trabaje a tu
-        favor, construyendo plataformas estables y de alto rendimiento.
-      </p>
-    </section>
-
-    <footer class="contacto">
-      <div class="container">
-        <h2>¿Listo para digitalizar tu negocio?</h2>
-        <br>
-          Hablemos sobre tu idea. Escríbeme directamente y empecemos a trabajar.<br/>
-          Correo: saulbrione@gmail.com
-        </p>
-        <br />
-        <a href="https://wa.me/593985560412" class="btn-primary" target="_blank"
-          >Escribir al WhatsApp</a
-        >
-        <p style="margin-top: 30px; color: #94a3b8">
-          También puedes revisar mi código fuente en
-          <a
-            href="https://github.com/saulbrione-web"
-            target="_blank"
-            style="color: #38bdf8"
-            >GitHub</a
-          >
-        </p>
-      </div>
-    </footer>
-    <div style="background-color: #020617; color: #64748b; text-align: center; padding: 20px 0; border-top: 1px solid #1e293b; font-size: 0.9em; margin-top: -1px;">
-        &copy; 2026 SOFTTecnología Briones. Todos los derechos reservados.<br>
-        <span style="opacity: 0.7; font-size: 0.85em;">Desarrollado con tecnología y código propio en Babahoyo, Ecuador.</span>
+    <canvas id="canvas-bg"></canvas>
+    <div class="watermark"></div>
+    
+    <div class="container" style="text-align: center; padding-top: 100px;">
+        <h1>SOFT TECNOLOGÍA BRIONES</h1>
+        <h1>Transformo tu negocio en una<br><span style="color: var(--neon-accent);">Máquina de Ventas</span></h1>
+        <p style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px;">Sistemas web a medida, rápidos y arquitecturas de bases de datos seguras para que gestiones tu empresa sin estrés.</p>
+        <a href="#cotizador" class="btn-neon">Iniciar Despliegue</a>
     </div>
-  </body>
+
+    <div class="container">
+        <h2><span class="tech-text">01.</span> Soluciones Tecnológicas</h2>
+        <div class="grid-3">
+            <div class="glass-panel" style="margin-bottom: 0;">
+                <h3 class="tech-text">Frontend / Interfaces</h3>
+                <p>Páginas de aterrizaje (Landing Pages) de carga ultrarrápida, diseñadas para captar clientes desde el primer segundo.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom: 0;">
+                <h3 class="tech-text">Sistemas & Backend</h3>
+                <p>Aplicaciones internas con lógica avanzada en Python para automatizar procesos, controlar inventarios y gestionar empleados.</p>
+            </div>
+            <div class="glass-panel" style="margin-bottom: 0;">
+                <h3 class="tech-text">Data & Seguridad</h3>
+                <p>Estructuración y protección de la información de tus clientes utilizando bases de datos relacionales robustas en PostgreSQL.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2><span class="tech-text">02.</span> Evidencia Técnica</h2>
+        <div class="grid-3">
+            <div class="glass-panel">
+                <img src="img/dashboard.png" alt="Sistema de Gestión" class="portafolio-img"  onclick="abrirModal(this)"/>
+                <h3 style="margin-top: 0;">Panel de Control Administrativo</h3>
+                <p><strong>Problema:</strong> Pérdida de inventario y datos en hojas de cálculo.</p>
+                <p><strong>Solución:</strong> Dashboard privado. Arquitectura backend y base de datos estructurada para integridad y velocidad.</p>
+            </div>
+            <div class="glass-panel">
+                <img src="img/barber.png" alt="Landing Page" class="portafolio-img"  onclick="abrirModal(this)"/>
+                <h3 style="margin-top: 0;">Diseño de una paguina</h3>
+                <p><strong>Problema:</strong> Negocio local sin reservas online, y pocos clientes.</p>
+                <p><strong>Solución:</strong> Interfaz ligera orientada a conversión móvil directa a WhatsApp, reduciendo fricción de clientes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="cotizador">
+        <h2><span class="tech-text">03.</span> Estimación de Recursos</h2>
+        <div class="glass-panel">
+            <form id="formulario-cotizador" style="display: grid; gap: 20px;">
+                
+                <div>
+                    <label class="tech-text">SELECCIONAR ARQUITECTURA:</label><br>
+                    <select id="tipo-proyecto" style="width: 100%; margin-top: 10px;">
+                        <option value="150">Landing Page (Presencia Rápida) - $150</option>
+                        <option value="350">Web Corporativa (Multisección) - $350</option>
+                        <option value="800">Sistema Web + Base de Datos - $800</option>
+                        <option value="1000">App Web Avanzada (Plataforma/SaaS) - $1,000</option>
+                        <option value="1200">App Móvil (Android / iOS) - $1,200</option>
+                        <option value="900">Programa de Escritorio (PC/Mac) - $900</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="tech-text">MÓDULOS ADICIONALES:</label><br>
+                    <div style="margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;">
+                        <label><input type="checkbox" class="extra-calc" value="150"> Integración PostgreSQL (+ $150)</label>
+                        <label><input type="checkbox" class="extra-calc" value="200"> Panel de Administración (+ $200)</label>
+                        <label><input type="checkbox" class="extra-calc" value="50"> API WhatsApp Botón (+ $50)</label>
+                        <label><input type="checkbox" class="extra-calc" value="80"> Diseño de Logotipo (+ $80)</label>
+                        <label><input type="checkbox" class="extra-calc" value="150"> Creación de Marca Personalizada (+ $150)</label>
+                        <label><input type="checkbox" class="extra-calc" value="250"> Codificación/Seguridad de Datos (+ $250)</label>
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="tech-text">TIEMPO DE EJECUCIÓN:</label><br>
+                    <select id="urgencia" style="width: 100%; margin-top: 10px;">
+                        <option value="1">Estándar Web (2-3 semanas)</option>
+                        <option value="1.25">Urgente Web (1 semana) - Recargo 25%</option>
+                        <option value="1">Estándar Apps/Software (1 a 1.5 meses)</option>
+                        <option value="1.3">Urgente Apps/Software (Menos de 1 mes) - Recargo 30%</option>
+                    </select>
+                </div>
+                
+                <div style="border-top: 1px solid rgba(0,255,204,0.2); margin-top: 20px; padding-top: 20px; text-align: center;">
+                    <p style="margin: 0; text-transform: uppercase; letter-spacing: 2px;">Inversión Estimada</p>
+                    <div class="precio-display" id="precio-total">$150.00</div>
+                    
+                    <p style="color: var(--neon-accent); font-size: 0.85em; margin-top: 15px; opacity: 0.9;">
+                        * NOTA DE PROTOCOLO: Para iniciar con el proceso de elaboración o actualización del proyecto, es estrictamente necesario el abono del 50% de la inversión.
+                    </p>
+
+                    <a href="#" id="btn-whatsapp-cotizador" class="btn-neon" style="margin-top: 20px;">Enviar Protocolo a WhatsApp</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div style="background-color: #02040a; border-top: 1px solid rgba(0,255,204,0.1); padding: 40px 0; text-align: center; margin-top: 40px;">
+        <div class="container" style="padding: 0;">
+            <p style="margin-bottom: 5px;" class="tech-text">&copy; 2026 SOFTTecnología Briones. Todos los derechos reservados.</p>
+            <p style="font-size: 0.85em; opacity: 0.5;">Desarrollado con tecnología y código propio, Ingeniería de software  desde Babahoyo, Ecuador.<br>
+            Código fuente almacenado en <a href="https://github.com/saulbrione-web" style="color: var(--neon-accent); text-decoration: none;">GitHub</a>.</p>
+        </div>
+    </div>
+    <div id="imageModal" class="modal-futurista" onclick="cerrarModal()">
+        <span class="cerrar-modal">&times;</span>
+        <img class="modal-contenido" id="imgAmpliada">
+    </div>
+
+    <script>
+        // 1. Lógica del Cotizador
+        function calcularPresupuesto() {
+            const tipoSelect = document.getElementById('tipo-proyecto');
+            let total = parseFloat(tipoSelect.value);
+            let nombreProyecto = tipoSelect.options[tipoSelect.selectedIndex].text;
+
+            const extras = document.querySelectorAll('.extra-calc:checked');
+            let serviciosExtra = "";
+            extras.forEach(extra => {
+                total += parseFloat(extra.value);
+                serviciosExtra += "- " + extra.parentElement.textContent.trim() + "%0A";
+            });
+
+            const multiplicador = parseFloat(document.getElementById('urgencia').value);
+            total = total * multiplicador;
+
+            document.getElementById('precio-total').innerText = "$" + total.toFixed(2);
+
+            // IMPORTANTE: Pon tu número de celular aquí
+            const telefono = "593985560412"; 
+            let mensaje = "Hola Edwin! Generé una cotización en tu sistema.%0A%0A";
+            mensaje += "*Arquitectura:* " + nombreProyecto + "%0A";
+            if (serviciosExtra !== "") mensaje += "*Módulos extra:*%0A" + serviciosExtra;
+            if (multiplicador > 1) mensaje += "*Prioridad:* Urgente%0A";
+            mensaje += "%0A*Inversión calculada:* $" + total.toFixed(2);
+
+            document.getElementById('btn-whatsapp-cotizador').href = "https://wa.me/" + telefono + "?text=" + mensaje;
+        }
+
+        document.getElementById('tipo-proyecto').addEventListener('change', calcularPresupuesto);
+        document.getElementById('urgencia').addEventListener('change', calcularPresupuesto);
+        document.querySelectorAll('.extra-calc').forEach(b => b.addEventListener('change', calcularPresupuesto));
+        calcularPresupuesto();
+
+        // 2. Sistema de Partículas (El fondo futurista)
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', setCanvasSize);
+        setCanvasSize();
+
+        let mouse = { x: null, y: null, radius: 150 }
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y;
+                this.directionX = directionX; this.directionY = directionY;
+                this.size = size; this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx*dx + dy*dy);
+                
+                if (distance < mouse.radius) {
+                    this.x -= dx/20;
+                    this.y -= dy/20;
+                }
+
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5;
+                let directionY = (Math.random() * 1) - 0.5;
+                let color = 'rgba(0, 255, 204, 0.5)';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0,0,innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
+                                   ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width/7) * (canvas.height/7)) {
+                        ctx.strokeStyle = 'rgba(0, 255, 204, ' + (1 - distance/20000) + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        init();
+        animate();
+
+        // --- Lógica del Visualizador de Imágenes ---
+        function abrirModal(elementoImagen) {
+            const modal = document.getElementById('imageModal');
+            const imgAmpliada = document.getElementById('imgAmpliada');
+            
+            modal.style.display = "flex"; // Muestra el modal
+            imgAmpliada.src = elementoImagen.src; // Copia la ruta de la imagen clickeada
+        }
+
+        function cerrarModal() {
+            document.getElementById('imageModal').style.display = "none"; // Oculta el modal
+        }
+    </script>
+</body>
 </html>
